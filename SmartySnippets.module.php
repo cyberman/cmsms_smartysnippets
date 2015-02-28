@@ -8,7 +8,7 @@
 # This project's homepage is: http://www.cmsmadesimple.org
 #
 # This file originally created by ModuleMaker module, version 0.3.2
-# Copyright (c) 2014 by Samuel Goldstein (sjg@cmsmadesimple.org) 
+# Copyright (c) 2014 by Samuel Goldstein (sjg@cmsmadesimple.org)
 #
 #-------------------------------------------------------------------------
 #
@@ -34,7 +34,7 @@ class SmartySnippets extends CGExtensions
 
 	function GetName()              { return 'SmartySnippets';                   }
 	function GetFriendlyName()      { return $this->Lang('friendlyname');        }
-    function GetVersion()           { return '0.1';                              }
+    function GetVersion()           { return '0.2';                              }
 	function GetHelp()              { return $this->Lang('help');                }
 	function GetAuthor()            { return 'Mike Crowe';                       }
 	function GetAuthorEmail()       { return 'drmikecrowe@gmail.com';            }
