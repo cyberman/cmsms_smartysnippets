@@ -1,0 +1,100 @@
+<h3>What Does This Do?</h3>
+<p>Smarty helper functions to assist in complex theme
+    implementation.&nbsp; Allows you to define dynamic Smarty snippets that
+    can be integrated in your content.<br>
+</p>
+<h3>Usage Instructions:</h3>
+<ul>
+    <li>Each snippet is prefixed with "ss_" to avoid naming conflicts</li>
+    <li>Two different types of snippets are supported:</li>
+    <ul>
+        <li>Blocks:&nbsp; Requires 2 tags, and open/close, such
+            as:&nbsp;&nbsp; {ss_example ...} content inside block {/ss_example}
+        </li>
+        <li>Functions:&nbsp; Single tag with all paramters, such as:&nbsp;
+            {ss_glyphicon icon="globe"}Here's a globe
+        </li>
+    </ul>
+    <li>&nbsp;A snippet should have a single HTML element wrapping your
+        content.&nbsp;&nbsp;</li>
+    <li>Attributes:</li>
+    <ul>
+        <li>The following parameters become attributes of your tag:</li>
+    </ul>
+    <ul>
+        <ul>
+            <li>'id', 'name', 'autocomplete', 'autocorrect', 'autofocus',
+                'autosuggest', 'checked', 'dirname', 'disabled', 'tabindex', 'list',
+                'max', 'maxlength', 'min', 'multiple', 'novalidate', 'pattern',
+                'placeholder', 'readonly', 'required', 'size', 'step', 'data_target'
+                'data_toggle'
+            </li>
+        </ul>
+    </ul>
+    <ul>
+        <li>Two smarty variables are created from these parameters:</li>
+        <ul>
+            <li>{$attributes} -- All the parameters above, concatonated into
+                a single string
+            </li>
+            <li>$attributes_without_id -- Same as above, but without the id
+                (useful when you insert your id manually)
+            </li>
+        </ul>
+    </ul>
+    <li>Smarty Variables:</li>
+    <ul>
+        <li>All other parameters are converted to smarty parameters.&nbsp;
+            See below for example
+        </li>
+    </ul>
+    <li>NOTE: In order to support attributes with "-" (such as
+        data-target, data-toggle), attribute names using "_" are converted to
+        "-".&nbsp; So, your tag may be <code>{ss_element data_toggle="xxxx"}</code>,
+        which will result in {$attributes} containing <code>data-toggle="xxxx"</code>.&nbsp;
+        Therefore, I recommend NOT using "_" in your parameters, to simplify
+        this process.<br>
+    </li>
+</ul>
+<h3>How Does It Work?</h3>
+<h4>Block Example:</h4>
+<p>You may define blocks of HTML code with parameters, such as elements
+    from themes.&nbsp; For example, your Block snippet may be a Twitter
+    Bootstrap panel, such as:</p>
+<div style="margin-left: 40px;">
+    <pre>&lt;div {$attributes} class="{$class}"&gt;<br>    &lt;div class="panel panel-default"&gt;<br>        &lt;h3 class="page-header"&gt;{$header}&lt;/h3&gt;<br>        &lt;div class="panel-body"&gt;<br>            &lt;div class="{$content_class}"&gt;<br>                {$content}<br>            &lt;/div&gt;<br>        &lt;/div&gt;<br>    &lt;/div&gt;<br>&lt;/div&gt;</pre>
+</div>
+<p>Then, in your page, you would use this like so:</p>
+<div style="margin-left: 40px;">
+    <pre>{ss_panel header="This is my test panel" id="panel_id" class="outer-class" contentclass="content-class"} 
+    This is the content of the panel<br>{/ss_panel}</pre>
+</div>
+<p>When rendered, your content will be:</p>
+<div style="margin-left: 40px;">
+    <pre>&lt;div id="panel_id" class="outer-class"&gt;<br>    &lt;div class="panel panel-default"&gt;<br>        &lt;h3 class="page-header"&gt;This is my test panel&lt;/h3&gt;<br>        &lt;div class="panel-body"&gt;<br>            &lt;div class=""&gt;<br>                This is the content of the panel<br>            &lt;/div&gt;<br>        &lt;/div&gt;<br>    &lt;/div&gt;<br>&lt;/div&gt;</pre>
+    </div>
+<h4>Function
+    Example:</h4>A function is similar, but doesn't require a closing tag.&nbsp; For instance, this is a real snippet from a recent theme:
+<br><br>
+<div style="margin-left: 40px;">
+        <pre>&lt;section class="{$class}" data-stellar-background-ratio="0.5" style="{$style}"&gt;<br>&nbsp;&nbsp;&nbsp; &lt;div class="container" style="margin-bottom: 50px;"&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div class="owl-carousel" data-navigation="false" data-singleitem="false" data-autoplay="true"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; data-animation="bounceIn"&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {foreach $images as $image_root}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {assign "image" cms_join_path($directory, $image_root)}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div class="item dragCursor"&gt;&lt;img src="{$image}" height="{$height}" alt="..."/&gt;&lt;/div&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {/foreach}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div&gt;<br>&nbsp;&nbsp;&nbsp; &lt;/div&gt;<br>&lt;/section&gt;<br></pre>
+</div><br>Inserted into the page as such:<br><br>
+<div style="margin-left: 40px;">
+    <pre>{ss_carousel images=get_matching_files("uploads/carousel", "png") height="200px" directory="uploads/carousel" class="color parallax" data-stellar-background-ratio="0.5" <br>	style="background-image:url(/uploads/theme/assets/images/preview/slider/parallax_bg.jpg)"}</pre>
+</div><br>
+
+<h3>Donations</h3>
+<p> Donations are appreciated, and would encourage continual
+    improvement of this module.<br>
+    <br>
+</p>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"><input name="cmd" value="_s-xclick" type="hidden"> <input name="hosted_button_id" value="K2LGNGX64UG48" type="hidden"> <input src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!" border="0" type="image"> <img alt="" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" border="0" height="1" width="1"></form>
+<h3>Support</h3>
+<p>As per the GPL, this software is provided as-is. Please read the
+    text of the license for the full disclaimer.</p>
+<h3>Copyright and License</h3>
+<p>Copyright � 2014, Mike Crowe <a href="mailto:drmikecrowe@gmail.com">&lt;drmikecrowe@gmail.com&gt;</a>.
+    All Rights Are Reserved.</p>
+<p>This module has been released under the <a href="http://www.gnu.org/licenses/licenses.html#GPL">GNU Public
+    License</a>.
+    You must agree to this license before using the module.</p>

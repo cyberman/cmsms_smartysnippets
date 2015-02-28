@@ -1,0 +1,1 @@
+<i class='glyphicon glyphicon-{$icon}'></i> &nbsp;
