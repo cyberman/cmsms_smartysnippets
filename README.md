@@ -35,6 +35,7 @@ Smarty helper functions to assist in complex theme implementation.&nbsp; Allows 
 
 *   All other parameters are converted to smarty parameters. See below for examples
   *   NOTE: In order to support attributes with "-" (such as data-target, data-toggle), attribute names using "\_" are converted to "-".&nbsp; So, your tag may be `{ss_element data_toggle="xxxx"}`, which will result in {$attributes} containing `data-toggle="xxxx"`.&nbsp; Therefore, I recommend NOT using "\_" in your parameters, to simplify this process.
+
 ### How Does It Work?
 
 #### Block Example:
