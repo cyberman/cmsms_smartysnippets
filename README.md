@@ -5,6 +5,11 @@ Develop new smarty block and functions for complex HTML used in modern themes
 
 Smarty helper functions to assist in complex theme implementation.&nbsp; Allows you to define dynamic Smarty snippets that can be integrated in your content.  Best of all, these snippets are TinyMCE compatible, so you can enter complex HTML inside page content and not loose attributes.
 
+### Screenshots
+
+* [Screenshot #1](https://raw.githubusercontent.com/drmikecrowe/cmsms_smartysnippets/master/SmartySnippets1.png)
+* [Screenshot #2](https://raw.githubusercontent.com/drmikecrowe/cmsms_smartysnippets/master/SmartySnippets2.png)
+
 ### Usage Instructions:
 
 *   Each snippet is prefixed with "ss_" to avoid naming conflicts
